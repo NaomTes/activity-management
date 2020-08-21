@@ -1,2 +1,2 @@
-class Api::V1::ProviderController < ApiController
+class Api::V1::ProvidersController < ApiController
 end
