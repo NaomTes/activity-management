@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :customers
   namespace :api do
     namespace :v1 do
-      resources :providers
+      resources :providers, except: [:new, :edit]
+      resources :customers, except: [:new, :edit]
     end
   end
 end
