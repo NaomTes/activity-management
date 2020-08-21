@@ -60,3 +60,5 @@ gem "hirb", "~> 0.7.3"
 gem "jwt", "~> 2.2"
 
 gem "fast_jsonapi", "~> 1.5"
+
+gem "devise", "~> 4.7"
