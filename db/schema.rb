@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_090249) do
+ActiveRecord::Schema.define(version: 2020_08_24_090632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,15 @@ ActiveRecord::Schema.define(version: 2020_08_24_090249) do
     t.index ["provided_service_id"], name: "index_requested_services_on_provided_service_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "booked_service_id"
+    t.text "comments"
+    t.integer "ratings"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booked_service_id"], name: "index_reviews_on_booked_service_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
   end
@@ -130,4 +139,5 @@ ActiveRecord::Schema.define(version: 2020_08_24_090249) do
   add_foreign_key "requested_services", "availabilities", on_delete: :cascade
   add_foreign_key "requested_services", "booking_requests", on_delete: :cascade
   add_foreign_key "requested_services", "provided_services", on_delete: :cascade
+  add_foreign_key "reviews", "booked_services", on_delete: :cascade
 end
