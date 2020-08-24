@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_075145) do
+ActiveRecord::Schema.define(version: 2020_08_24_080033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availability_durations", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.date "available_one"
+    t.time "from_time"
+    t.time "to_time"
+    t.string "repetition"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider_id"], name: "index_availability_durations_on_provider_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -70,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_075145) do
     t.string "name"
   end
 
+  add_foreign_key "availability_durations", "providers", on_delete: :cascade
   add_foreign_key "provided_services", "providers", on_delete: :cascade
   add_foreign_key "provided_services", "services", on_delete: :cascade
 end
