@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_081717) do
+ActiveRecord::Schema.define(version: 2020_08_24_083059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.bigint "availability_duration_id"
+    t.date "available_one"
+    t.time "from_time"
+    t.time "to_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["availability_duration_id"], name: "index_availabilities_on_availability_duration_id"
+  end
 
   create_table "availability_durations", force: :cascade do |t|
     t.bigint "provider_id"
@@ -90,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_08_24_081717) do
   create_table "requested_services", force: :cascade do |t|
     t.bigint "provided_service_id"
     t.bigint "booking_request_id"
+    t.bigint "availability_id"
+    t.index ["availability_id"], name: "index_requested_services_on_availability_id"
     t.index ["booking_request_id"], name: "index_requested_services_on_booking_request_id"
     t.index ["provided_service_id"], name: "index_requested_services_on_provided_service_id"
   end
@@ -98,11 +110,13 @@ ActiveRecord::Schema.define(version: 2020_08_24_081717) do
     t.string "name"
   end
 
+  add_foreign_key "availabilities", "availability_durations", on_delete: :cascade
   add_foreign_key "availability_durations", "providers", on_delete: :cascade
   add_foreign_key "booking_requests", "customers", on_delete: :cascade
   add_foreign_key "bookings", "customers", on_delete: :cascade
   add_foreign_key "provided_services", "providers", on_delete: :cascade
   add_foreign_key "provided_services", "services", on_delete: :cascade
+  add_foreign_key "requested_services", "availabilities", on_delete: :cascade
   add_foreign_key "requested_services", "booking_requests", on_delete: :cascade
   add_foreign_key "requested_services", "provided_services", on_delete: :cascade
 end
