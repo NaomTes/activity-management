@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_081419) do
+ActiveRecord::Schema.define(version: 2020_08_24_081717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,13 @@ ActiveRecord::Schema.define(version: 2020_08_24_081419) do
     t.index ["reset_password_token"], name: "index_providers_on_reset_password_token", unique: true
   end
 
+  create_table "requested_services", force: :cascade do |t|
+    t.bigint "provided_service_id"
+    t.bigint "booking_request_id"
+    t.index ["booking_request_id"], name: "index_requested_services_on_booking_request_id"
+    t.index ["provided_service_id"], name: "index_requested_services_on_provided_service_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
   end
@@ -96,4 +103,6 @@ ActiveRecord::Schema.define(version: 2020_08_24_081419) do
   add_foreign_key "bookings", "customers", on_delete: :cascade
   add_foreign_key "provided_services", "providers", on_delete: :cascade
   add_foreign_key "provided_services", "services", on_delete: :cascade
+  add_foreign_key "requested_services", "booking_requests", on_delete: :cascade
+  add_foreign_key "requested_services", "provided_services", on_delete: :cascade
 end
