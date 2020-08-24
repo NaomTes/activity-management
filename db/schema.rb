@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_081059) do
+ActiveRecord::Schema.define(version: 2020_08_24_081419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(version: 2020_08_24_081059) do
   create_table "booking_requests", force: :cascade do |t|
     t.bigint "customer_id"
     t.index ["customer_id"], name: "index_booking_requests_on_customer_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_bookings_on_customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -88,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_081059) do
 
   add_foreign_key "availability_durations", "providers", on_delete: :cascade
   add_foreign_key "booking_requests", "customers", on_delete: :cascade
+  add_foreign_key "bookings", "customers", on_delete: :cascade
   add_foreign_key "provided_services", "providers", on_delete: :cascade
   add_foreign_key "provided_services", "services", on_delete: :cascade
 end
