@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_090632) do
+ActiveRecord::Schema.define(version: 2020_08_24_091023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2020_08_24_090632) do
     t.time "to_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "booked_service_id"
     t.index ["availability_duration_id"], name: "index_availabilities_on_availability_duration_id"
+    t.index ["booked_service_id"], name: "index_availabilities_on_booked_service_id"
   end
 
   create_table "availability_durations", force: :cascade do |t|
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_090632) do
   end
 
   add_foreign_key "availabilities", "availability_durations", on_delete: :cascade
+  add_foreign_key "availabilities", "booked_services", on_delete: :cascade
   add_foreign_key "availability_durations", "providers", on_delete: :cascade
   add_foreign_key "booked_services", "bookings", on_delete: :cascade
   add_foreign_key "booked_services", "provided_services", on_delete: :cascade
