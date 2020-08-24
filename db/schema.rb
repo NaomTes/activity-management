@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_105816) do
+ActiveRecord::Schema.define(version: 2020_08_24_075145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2020_08_21_105816) do
     t.string "country"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "provided_services", force: :cascade do |t|
+    t.bigint "provider_id"
+    t.bigint "service_id"
+    t.decimal "price", precision: 10, scale: 2
+    t.text "service_description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider_id"], name: "index_provided_services_on_provider_id"
+    t.index ["service_id"], name: "index_provided_services_on_service_id"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -59,4 +70,6 @@ ActiveRecord::Schema.define(version: 2020_08_21_105816) do
     t.string "name"
   end
 
+  add_foreign_key "provided_services", "providers", on_delete: :cascade
+  add_foreign_key "provided_services", "services", on_delete: :cascade
 end
