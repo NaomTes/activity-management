@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_083059) do
+ActiveRecord::Schema.define(version: 2020_08_24_090249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_08_24_083059) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["provider_id"], name: "index_availability_durations_on_provider_id"
+  end
+
+  create_table "booked_services", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "provided_service_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_booked_services_on_booking_id"
+    t.index ["provided_service_id"], name: "index_booked_services_on_provided_service_id"
   end
 
   create_table "booking_requests", force: :cascade do |t|
@@ -112,6 +121,8 @@ ActiveRecord::Schema.define(version: 2020_08_24_083059) do
 
   add_foreign_key "availabilities", "availability_durations", on_delete: :cascade
   add_foreign_key "availability_durations", "providers", on_delete: :cascade
+  add_foreign_key "booked_services", "bookings", on_delete: :cascade
+  add_foreign_key "booked_services", "provided_services", on_delete: :cascade
   add_foreign_key "booking_requests", "customers", on_delete: :cascade
   add_foreign_key "bookings", "customers", on_delete: :cascade
   add_foreign_key "provided_services", "providers", on_delete: :cascade
