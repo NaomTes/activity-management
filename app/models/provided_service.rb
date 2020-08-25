@@ -4,6 +4,10 @@ class ProvidedService < ApplicationRecord
   has_many :requested_services
   has_many :booked_services
 
+  def service_name
+    service.name
+  end
+
   validates :service_id, :uniqueness => { :scope => :provider_id }
 
   validates :service_description,

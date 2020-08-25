@@ -24,4 +24,10 @@ class Provider < ApplicationRecord
 
   validates :profile_description, length: { minimum: 5, maximum: 100 }
   validates :base_price, numericality: true
+
+  def self.authenticate(email, password)
+    provider = Provider.find_by(email: email)
+    return nil unless provider.present?
+    provider.valid_password?(password) ? provider : nil
+  end
 end
