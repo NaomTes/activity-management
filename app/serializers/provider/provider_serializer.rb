@@ -1,4 +1,4 @@
-class ProviderSerializer
+class Provider::ProviderSerializer
   include FastJsonapi::ObjectSerializer
   attributes :first_name,
              :last_name,
