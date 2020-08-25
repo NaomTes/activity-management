@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         resources :profiles, only: [:create, :update]
         resources :sessions, only: [:create]
         resources :services, only: [:index]
+        resources :provided_services, only: [:create]
       end
     end
   end
