@@ -2,7 +2,8 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
   before_action :authenticate
 
   def create
-    @provided_service = ProvidedService.new(provided_service_params)
+    byebug
+    @provided_service = current_provider.provided_services.new(provided_service_params)
     if @provided_service.save
       render json: Provider::ProvidedServiceSerializer.new(@provided_service).serialized_json,
              status: :created
@@ -22,7 +23,6 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
     params.require(:provided_service).permit(
       :price,
       :service_description,
-      :provider_id,
       :service_id
     )
   end
