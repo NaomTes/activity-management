@@ -11,6 +11,11 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
     end
   end
 
+  def index
+    @provided_services = current_provider.provided_services
+    render json: Provider::ProvidedServiceSerializer.new(@provided_services)
+  end
+
   private
 
   def provided_service_params
