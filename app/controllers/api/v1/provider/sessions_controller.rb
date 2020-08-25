@@ -1,11 +1,10 @@
 class Api::V1::Provider::SessionsController < Api::V1::Provider::ApiController
   def create
-    @provider = Provider.find_by(email: params[:provider][:email])
-    if @provider && @provider.valid_password?(params[:provider][:password])
-      token = JsonWebToken.encode({ provider_id: @provider.id })
-      render json: { provider: @provider, token: token }
+    @provider = Provider.find_by(email: params[:email])
+    if @provider && @provider.valid_password?(params[:password])
+      render json: Provider::ProviderSerializer.new(@provider).serialized_json, status: :created
     else
-      render json: { error: "Invalid email or password" }
+      invalid_credentials
     end
   end
 end
