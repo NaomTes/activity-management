@@ -2,8 +2,7 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
   before_action :authenticate
 
   def create
-    byebug
-    @provided_service = current_provider.provided_services.new(provided_service_params)
+    @provided_service = current_provider.provided_services.build(provided_service_params)
     if @provided_service.save
       render json: Provider::ProvidedServiceSerializer.new(@provided_service).serialized_json,
              status: :created
