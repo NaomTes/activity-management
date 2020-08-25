@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         resources :sessions, only: [:create]
         resources :services, only: [:index]
         resources :provided_services, only: [:create, :index]
+        resources :availability_durations, only: [:create]
       end
     end
   end
