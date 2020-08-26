@@ -16,7 +16,7 @@ class Provider < ApplicationRecord
             :postal_code,
             :country, presence: true
 
-  validates :first_name, :last_name, length: { minimum: 5, maximum: 50 }
+  validates :first_name, :last_name, length: { minimum: 3, maximum: 50 }
 
   validates :age,
             numericality: { only_integer: true },
@@ -29,5 +29,9 @@ class Provider < ApplicationRecord
     provider = Provider.find_by(email: email)
     return nil unless provider.present?
     provider.valid_password?(password) ? provider : nil
+  end
+
+  def display_name
+    self.email
   end
 end
