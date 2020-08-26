@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_162135) do
+ActiveRecord::Schema.define(version: 2020_08_26_052740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "availabilities", force: :cascade do |t|
     t.bigint "availability_duration_id"
-    t.date "available_one"
+    t.date "available_on"
     t.time "from_time"
     t.time "to_time"
     t.datetime "created_at", precision: 6, null: false

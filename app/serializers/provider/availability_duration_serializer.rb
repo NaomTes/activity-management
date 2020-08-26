@@ -10,4 +10,7 @@ class Provider::AvailabilityDurationSerializer
   attribute :to_time do |duration|
     duration.to_time.strftime("%I:%M%p")
   end
+  attribute :availabilities do |duration|
+    Provider::AvailabilitySerializer.new(duration.availabilities)
+  end
 end

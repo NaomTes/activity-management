@@ -4,8 +4,10 @@ class Api::V1::Provider::AvailabilityDurationsController < Api::V1::Provider::Ap
   def create
     @duration = current_provider.availability_durations.build(duration_params)
     if @duration.save
-      render json: Provider::AvailabilityDurationSerializer.new(@duration).serialized_json,
-             status: :created
+      if CreateAvailability.new(@duration).call
+        render json: Provider::AvailabilityDurationSerializer.new(@duration).serialized_json,
+               status: :created
+      end
     else
       unprocessable_entity @duration.errors
     end
