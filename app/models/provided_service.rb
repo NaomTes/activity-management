@@ -11,7 +11,7 @@ class ProvidedService < ApplicationRecord
 
   validates :price, numericality: true
 
-  delegate :name, to: :service
+  delegate :name, to: :service, prefix: true
 
   validates :service_description, length: { minimum: 5, maximum: 50 }
 end

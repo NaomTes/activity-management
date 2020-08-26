@@ -4,10 +4,9 @@ class Api::V1::Provider::AvailabilityDurationsController < Api::V1::Provider::Ap
   def create
     @duration = current_provider.availability_durations.build(duration_params)
     if @duration.save
-      if CreateAvailability.new(@duration).call
-        render json: Provider::AvailabilityDurationSerializer.new(@duration).serialized_json,
-               status: :created
-      end
+      CreateAvailability.new(@duration).call
+      render json: Provider::AvailabilityDurationSerializer.new(@duration).serialized_json,
+             status: :created
     else
       unprocessable_entity @duration.errors
     end
@@ -20,8 +19,8 @@ class Api::V1::Provider::AvailabilityDurationsController < Api::V1::Provider::Ap
       :starting_date,
       :from_time,
       :to_time,
-      { :repetition_days => [] },
-      :repetition
+      :repetition,
+      repetition_days: [],
     )
   end
 end
