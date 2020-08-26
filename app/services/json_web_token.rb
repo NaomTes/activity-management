@@ -1,9 +1,9 @@
 class JsonWebToken
   def self.encode(payload)
-    JWT.encode(payload, Rails.application.credentials.secret_key_base)
+    JWT.encode(payload, ENV["SECRET_KEY_BASE"])
   end
   def self.decode(token)
-    HashWithIndifferentAccess.new(JWT.decode(token, Rails.application.credentials.secret_key_base)[0])
+    HashWithIndifferentAccess.new(JWT.decode(token, ENV["SECRET_KEY_BASE"])[0])
   rescue JWT::ExpiredSignature
     "Token Expired"
   rescue

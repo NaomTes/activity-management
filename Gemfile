@@ -64,3 +64,5 @@ gem "fast_jsonapi", "~> 1.5"
 gem "devise", "~> 4.7"
 
 gem "will_paginate", "~> 3.3"
+
+gem 'dotenv-rails'
