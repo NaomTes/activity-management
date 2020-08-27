@@ -13,19 +13,19 @@ ActiveAdmin.register Provider do
                 :password_confirmation
 
   form do |f|
-    inputs "Details" do
-      input :first_name
-      input :last_name
-      input :age
-      input :profile_description
-      input :base_price
-      input :email
-      input :password
-      input :password_confirmation
-      input :street
-      input :city
-      input :postal_code
-      input :country
+    f.inputs "Details" do
+      f.input :first_name
+      f.input :last_name
+      f.input :age
+      f.input :profile_description
+      f.input :base_price
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+      f.input :street
+      f.input :city
+      f.input :postal_code
+      f.input :country
     end
     actions
   end

@@ -30,8 +30,4 @@ class Provider < ApplicationRecord
     return nil unless provider.present?
     provider.valid_password?(password) ? provider : nil
   end
-
-  def display_name
-    self.email
-  end
 end
