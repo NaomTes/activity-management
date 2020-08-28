@@ -3,7 +3,6 @@ class Api::V1::Provider::ProfilesController < Api::V1::Provider::ApiController
   before_action :set_provider, only: [:update]
 
   def create
-    byebug
     @provider = Provider.new(provider_params)
     if @provider.save
       render json: Provider::ProviderSerializer.new(@provider).serialized_json, status: :created
