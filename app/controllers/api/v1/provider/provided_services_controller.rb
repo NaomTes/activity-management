@@ -12,13 +12,15 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
   end
 
   def index
-    @provided_services = current_provider.provided_services
-    render json: Provider::ProvidedServiceSerializer.new(@provided_services)
+    pagy, provided_services = pagy(current_provider.provided_services)
+    render json: Provider::ProvidedServiceSerializer.new(provided_services)
+             .serializable_hash.merge(pagy: pagy), status: :ok
   end
 
   def show
     @provided_service = current_provider.provided_services.find(params[:id])
-    render json: Provider::ProvidedServiceSerializer.new(@provided_service)
+    render json: Provider::ProvidedServiceSerializer.new(@provided_service).serialized_json,
+           status: :ok
   end
 
   private

@@ -69,3 +69,4 @@ gem 'dotenv-rails'
 gem "activeadmin", "~> 2.7"
 
 gem 'country_select', '~> 4.0'
+gem "pagy", "~> 3.8"
