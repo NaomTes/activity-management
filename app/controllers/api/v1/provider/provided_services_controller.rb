@@ -22,7 +22,8 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
     params.require(:provided_service).permit(
       :price,
       :service_description,
-      :service_id
+      :service_id,
+      :status
     )
   end
 end
