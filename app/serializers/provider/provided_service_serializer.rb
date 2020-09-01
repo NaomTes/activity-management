@@ -4,5 +4,6 @@ class Provider::ProvidedServiceSerializer
   attributes :service_description,
              :price,
              :provider_id,
-             :service_name
+             :service_name,
+             :status
 end
