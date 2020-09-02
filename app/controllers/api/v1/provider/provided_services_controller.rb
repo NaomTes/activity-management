@@ -17,7 +17,7 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
       render json: Provider::ProvidedServiceSerializer.new(provided_services)
                .serializable_hash.merge(pagy: pagy), status: :ok
     rescue
-      render json: { errors: ["Record was not found"] }, status: :not_foun
+      render json: { errors: ["Record was not found"] }, status: :not_found
     end
   end
 
