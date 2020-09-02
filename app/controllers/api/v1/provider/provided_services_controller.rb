@@ -13,8 +13,7 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
 
   def index
     begin
-      # pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
-      pagy, provided_services = pagy(ProvidedService.all, items: params[:per_page], page: params[:page])
+      pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
       render json: Provider::ProvidedServiceSerializer.new(provided_services)
                .serializable_hash.merge(pagy: pagy), status: :ok
     rescue
