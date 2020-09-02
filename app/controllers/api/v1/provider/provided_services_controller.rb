@@ -13,7 +13,8 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
 
   def index
     begin
-      pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
+      # pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
+      pagy, provided_services = pagy(ProvidedService.all, items: params[:per_page], page: params[:page])
       render json: Provider::ProvidedServiceSerializer.new(provided_services)
                .serializable_hash.merge(pagy: pagy), status: :ok
     rescue
@@ -22,9 +23,13 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
   end
 
   def show
-    @provided_service = current_provider.provided_services.find(params[:id])
-    render json: Provider::ProvidedServiceSerializer.new(@provided_service).serialized_json,
-           status: :ok
+    begin
+      @provided_service = current_provider.provided_services.find(params[:id])
+      render json: Provider::ProvidedServiceSerializer.new(@provided_service).serialized_json,
+             status: :ok
+    rescue
+      render json: { errors: ["Record was not found"] }, status: :not_found
+    end
   end
 
   private
