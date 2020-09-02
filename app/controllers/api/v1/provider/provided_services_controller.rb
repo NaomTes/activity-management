@@ -1,4 +1,5 @@
 class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiController
+  rescue_from Pagy::Error, with: :handle_pagy_errors
   before_action :authenticate
 
   def create
@@ -32,5 +33,9 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
       :service_id,
       :status
     )
+  end
+
+  def handle_pagy_errors
+    render json: { errors: ["Record was not found"] }, status: :not_found
   end
 end
