@@ -1,5 +1,4 @@
 class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiController
-  rescue_from Pagy::Error, with: :handle_pagy_errors
   before_action :authenticate
 
   def create
@@ -13,9 +12,13 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
   end
 
   def index
-    pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
-    render json: Provider::ProvidedServiceSerializer.new(provided_services)
-             .serializable_hash.merge(pagy: pagy), status: :ok
+    begin
+      pagy, provided_services = pagy(current_provider.provided_services, items: params[:per_page], page: params[:page])
+      render json: Provider::ProvidedServiceSerializer.new(provided_services)
+               .serializable_hash.merge(pagy: pagy), status: :ok
+    rescue
+      render json: { errors: ["Record was not found"] }, status: :not_foun
+    end
   end
 
   def show
@@ -33,9 +36,5 @@ class Api::V1::Provider::ProvidedServicesController < Api::V1::Provider::ApiCont
       :service_id,
       :status
     )
-  end
-
-  def handle_pagy_errors
-    render json: { errors: ["Record was not found"] }, status: :not_found
   end
 end
