@@ -4,7 +4,7 @@ class ProvidedService < ApplicationRecord
   has_many :requested_services
   has_many :booked_services
 
-  validates :service_id, :uniqueness => { :scope => :provider_id }
+  validates :service_id, uniqueness: { scope: :provider_id, message: "Service already created" }
 
   validates :service_description,
             :price, presence: true
