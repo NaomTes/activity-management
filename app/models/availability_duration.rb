@@ -6,9 +6,11 @@ class AvailabilityDuration < ApplicationRecord
             :from_time,
             :to_time,
             :repetition_days,
+            :slots_offset,
             :repetition, presence: true
 
-  validates :repetition, numericality: { only_integer: true }
+  validates :repetition,
+            :slots_offset, numericality: { only_integer: true }
 
   validate :starting_date_cannot_be_in_the_past
 

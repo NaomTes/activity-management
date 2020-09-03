@@ -20,6 +20,7 @@ class Api::V1::Provider::AvailabilityDurationsController < Api::V1::Provider::Ap
       :from_time,
       :to_time,
       :repetition,
+      :slots_offset,
       repetition_days: [],
     )
   end

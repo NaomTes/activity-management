@@ -4,7 +4,7 @@ class CreateAvailability
 
   def initialize(duration)
     @duration = duration
-    @interval_offset = 1
+    @interval_offset = duration.slots_offset
   end
 
   def call

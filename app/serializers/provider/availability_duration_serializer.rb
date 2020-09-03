@@ -4,7 +4,8 @@ class Provider::AvailabilityDurationSerializer
   attributes :provider_id,
              :starting_date,
              :repetition,
-             :repetition_days
+             :repetition_days,
+             :slots_offset
 
   attribute :from_time do |duration|
     duration.from_time.strftime("%I:%M%p")

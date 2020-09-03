@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_070558) do
+ActiveRecord::Schema.define(version: 2020_09_03_192211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_070558) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "repetition"
+    t.integer "slots_offset"
     t.index ["provider_id"], name: "index_availability_durations_on_provider_id"
   end
 
