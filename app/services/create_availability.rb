@@ -19,11 +19,16 @@ class CreateAvailability
     initial_time = start_time.to_time
 
     intervals.times do
-      duration.availabilities.create!(
-        available_on: date,
-        from_time: from_post_meridiem_time(initial_time),
-        to_time: from_post_meridiem_time(initial_time + interval_offset.hour),
-      )
+      begin
+        duration.availabilities.create!(
+          provider_id: duration.provider_id,
+          available_on: date,
+          from_time: from_post_meridiem_time(initial_time),
+          to_time: from_post_meridiem_time(initial_time + interval_offset.hour),
+        )
+      rescue
+        puts "Duplicate service"
+      end
       initial_time += interval_offset.hour
     end
   end

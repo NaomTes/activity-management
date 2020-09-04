@@ -6,6 +6,7 @@ class Provider < ApplicationRecord
   accepts_nested_attributes_for :provided_services
   has_many :services, through: :provided_services
   has_many :availability_durations
+  has_many :availabilities
 
   validates :first_name,
             :last_name,
