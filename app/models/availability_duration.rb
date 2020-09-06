@@ -5,7 +5,6 @@ class AvailabilityDuration < ApplicationRecord
   validates :starting_date,
             :from_time,
             :to_time,
-            :repetition_days,
             :slots_offset,
             :repetition, presence: true
 
