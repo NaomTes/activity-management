@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         resources :services, only: [:index]
         resources :provided_services, only: [:create, :index, :show, :update]
         resources :availability_durations, only: [:create]
+        resources :availabilities, only: [:index]
       end
     end
   end
