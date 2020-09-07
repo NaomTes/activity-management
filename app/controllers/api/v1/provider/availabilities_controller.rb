@@ -6,4 +6,18 @@ class Api::V1::Provider::AvailabilitiesController < Api::V1::Provider::ApiContro
     render json: Provider::AvailabilitySerializer.new(availabilities).serializable_hash,
            status: :ok
   end
+
+  def show
+    @availability = current_provider.availabilities.find(params[:id])
+    render json: Provider::AvailabilitySerializer.new(@availability).serializable_hash,
+           status: :ok
+  end
+
+  def destroy
+    @availability = current_provider.availabilities.find(params[:id])
+    if @availability.destroy
+      render json: Provider::AvailabilitySerializer.new(@availability).serializable_hash,
+             status: :ok
+    end
+  end
 end
