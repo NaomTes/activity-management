@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       namespace :customer do
         resources :profiles, only: [:create]
         resources :sessions, only: [:create]
+        resources :booking_requests, only: [:create]
       end
     end
   end
