@@ -23,4 +23,10 @@ class Customer < ApplicationRecord
   VALID_PHONE_REGEX = /\A^\d{4}-\d{7}$\z/i
   validates :phone_number, uniqueness: true,
                            format: { with: VALID_PHONE_REGEX }
+
+  def self.authenticate(email, password)
+    customer = Customer.find_by(email: email)
+    return nil unless customer.present?
+    customer.valid_password?(password) ? customer : nil
+  end
 end
