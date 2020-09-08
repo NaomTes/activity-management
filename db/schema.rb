@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_061245) do
+ActiveRecord::Schema.define(version: 2020_09_08_105048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_061245) do
 
   create_table "booking_requests", force: :cascade do |t|
     t.bigint "customer_id"
+    t.integer "status", default: 0
     t.index ["customer_id"], name: "index_booking_requests_on_customer_id"
   end
 
