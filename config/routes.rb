@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   namespace :api do
@@ -10,6 +11,9 @@ Rails.application.routes.draw do
         resources :provided_services, only: [:create, :index, :show, :update]
         resources :availability_durations, only: [:create]
         resources :availabilities, only: [:index, :show, :destroy]
+      end
+      namespace :customer do
+        resources :profiles, only: [:create]
       end
     end
   end
