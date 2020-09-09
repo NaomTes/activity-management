@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :provider do
-        resources :profiles, only: [:create, :update, :show]
+        resources :profiles, only: [:create, :update, :show, :index]
         resources :sessions, only: [:create]
         resources :services, only: [:index]
         resources :provided_services, only: [:create, :index, :show, :update]

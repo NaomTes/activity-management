@@ -10,6 +10,7 @@ class Provider::ProviderSerializer
              :street,
              :city,
              :postal_code,
-             :country,
-             :auth_token
+             :country
+
+  attribute :auth_token, if: Proc.new { |provider, params| params[:auth_token] }
 end

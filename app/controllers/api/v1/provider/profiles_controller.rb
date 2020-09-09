@@ -5,10 +5,16 @@ class Api::V1::Provider::ProfilesController < Api::V1::Provider::ApiController
   def create
     @provider = Provider.new(provider_params)
     if @provider.save
-      render json: Provider::ProviderSerializer.new(@provider).serialized_json, status: :created
+      render json: Provider::ProviderSerializer.new(@provider, { params: { auth_token: true } }).serialized_json,
+             status: :created
     else
       unprocessable_entity @provider.errors
     end
+  end
+
+  def index
+    @providers = Provider.filter(params[:service])
+    render json: Provider::ProviderSerializer.new(@providers).serialized_json, status: :ok
   end
 
   def update

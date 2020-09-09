@@ -40,4 +40,13 @@ class Provider < ApplicationRecord
     return nil unless provider.present?
     provider.valid_password?(password) ? provider : nil
   end
+
+  def self.filter(service)
+    # byebug
+    @service = Service.find_by(name: service)
+    @providers = Provider.find(
+      ProvidedService.where("service_id = ? AND status = true ", @service.id)
+        .pluck(:provider_id).uniq
+    )
+  end
 end
