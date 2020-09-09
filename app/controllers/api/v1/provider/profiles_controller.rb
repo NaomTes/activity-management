@@ -1,6 +1,6 @@
 class Api::V1::Provider::ProfilesController < Api::V1::Provider::ApiController
   before_action :authenticate, only: [:update]
-  before_action :set_provider, only: [:update]
+  before_action :set_provider, only: [:update, :show]
 
   def create
     @provider = Provider.new(provider_params)
@@ -12,12 +12,16 @@ class Api::V1::Provider::ProfilesController < Api::V1::Provider::ApiController
   end
 
   def update
-    @provider = Provider.find(params[:id])
     if @provider.update(provider_params)
       render json: Provider::ProviderSerializer.new(@provider).serialized_json, status: :created
     else
       unprocessable_entity @provider.errors
     end
+  end
+
+  def show
+    @reviews = @provider.reviews
+    render json: Provider::ReviewSerializer.new(@reviews).serialized_json, status: :ok
   end
 
   private
