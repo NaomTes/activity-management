@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         resources :sessions, only: [:create]
         resources :booking_requests, only: [:create]
         resources :bookings, only: [:index, :show]
+        resources :reviews, only: [:create]
       end
     end
   end

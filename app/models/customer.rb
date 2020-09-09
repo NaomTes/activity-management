@@ -5,6 +5,8 @@ class Customer < ApplicationRecord
   has_many :booking_requests
   has_many :bookings
 
+  has_many :booked_services, through: :bookings
+
   validates :first_name,
             :last_name,
             :age,
