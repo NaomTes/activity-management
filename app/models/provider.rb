@@ -11,6 +11,9 @@ class Provider < ApplicationRecord
   has_many :requested_services, through: :provided_services
   has_many :booking_requests, through: :requested_services
 
+  has_many :booked_services, through: :provided_services
+  has_many :bookings, through: :booked_services
+
   validates :first_name,
             :last_name,
             :age,
