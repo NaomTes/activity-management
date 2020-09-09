@@ -14,4 +14,9 @@ class Api::V1::Customer::BookingsController < Api::V1::Customer::ApiController
       render json: { errors: ["Record was not found"] }, status: :not_found
     end
   end
+
+  def show 
+    @booking = current_customer.bookings.find(params[:id])
+    render json: Customer::BookingSerializer.new(@booking).serializable_hash, status: :ok
+  end
 end
