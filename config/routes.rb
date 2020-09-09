@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         resources :provided_services, only: [:create, :index, :show, :update]
         resources :availability_durations, only: [:create]
         resources :availabilities, only: [:index, :show, :destroy]
-        resources :booking_requests, only: [:index]
+        resources :booking_requests, only: [:index, :update, :show]
       end
       namespace :customer do
         resources :profiles, only: [:create]
