@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :booking_requests, only: [:create]
         resources :bookings, only: [:index, :show]
         resources :reviews, only: [:create]
+        resources :services, only: [:index]
       end
     end
   end
