@@ -14,7 +14,11 @@ class Api::V1::Provider::ProfilesController < Api::V1::Provider::ApiController
 
   def index
     @providers = Provider.filter(params[:service])
-    render json: Provider::ProviderSerializer.new(@providers).serialized_json, status: :ok
+    if @providers
+      render json: Provider::ProviderSerializer.new(@providers).serialized_json, status: :ok
+    else
+      render json: { errors: ["Object was not found"] }, status: :not_found
+    end
   end
 
   def update
