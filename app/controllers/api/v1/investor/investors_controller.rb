@@ -67,8 +67,12 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       :investment_rates,
     ).to_h
 
-    individual_score = 10
-    total_score = ratings_data.count * individual_score
+    individual_score = 1
+    total_score = 0
+
+    ratings_data.each do |key, value|
+      total_score += (individual_score * value)
+    end
 
     results = []
     Investor.all.each do |investor|
@@ -77,14 +81,13 @@ class Api::V1::Investor::InvestorsController < ActionController::API
         investor_meta_data = eval("investor.#{key}")
         startup_meta_data = eval("startup_data[:#{key}]")
 
-        weightage = (value.to_f * 2) / individual_score
         if investor_meta_data.class == Array
           if startup_meta_data.count > 0
-            investor_score += (((investor_meta_data & startup_meta_data).count.to_f / startup_meta_data.count) * individual_score) * weightage
+            investor_score += (((investor_meta_data & startup_meta_data).count.to_f / startup_meta_data.count) * (individual_score * value))
           end
         else
           if startup_meta_data == investor_meta_data
-            investor_score += (individual_score * weightage)
+            investor_score += (individual_score * value)
           end
         end
       end
