@@ -24,8 +24,12 @@ Rails.application.routes.draw do
       end
 
       namespace :investor do
-        resources :investors, only: [:create, :index]
-        resources :startups, only: [:create, :index]
+        resources :investors, only: [:create] do
+          post "process_results", on: :collection
+        end
+        resources :startups, only: [:create] do 
+          post 'process_results', on: :collection
+        end
       end
     end
   end

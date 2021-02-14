@@ -31,6 +31,10 @@ class Api::V1::Investor::InvestorsController < ActionController::API
     end
   end
 
+  def process_results
+    byebug
+  end
+
   private
     def unprocessable_entity(errors)
       render json: { errors: errors }, status: :unprocessable_entity

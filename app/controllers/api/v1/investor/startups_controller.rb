@@ -35,6 +35,10 @@ class Api::V1::Investor::StartupsController < ActionController::API
     end
   end
 
+  def process_results
+    byebug
+  end
+
   private
 
   def unprocessable_entity(errors)
