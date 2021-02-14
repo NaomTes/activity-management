@@ -22,6 +22,11 @@ Rails.application.routes.draw do
         resources :reviews, only: [:create]
         resources :services, only: [:index]
       end
+
+      namespace :investor do
+        resources :investors, only: [:create, :index]
+        resources :startups, only: [:create, :index]
+      end
     end
   end
 end
