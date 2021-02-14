@@ -1,4 +1,6 @@
 class Api::V1::Investor::StartupsController < ActionController::API
+  include ActionView::Helpers::NumberHelper
+
   def create
     startup_params = params.require(:startups).permit(
       :first_name,
@@ -60,7 +62,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
 
     ratings_data = params.require(:ratings).permit(
       :investment_stages,
-      :investment_industry,
+      :investment_category,
       :emerging_technologies,
       :investment_rates,
     ).to_h
@@ -68,6 +70,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
     individual_score = 10
     total_score = ratings_data.count * individual_score
 
+    results = []
     Startup.all.each do |startup|
       startup_score = 0
       ratings_data.each do |key, value|
@@ -75,10 +78,10 @@ class Api::V1::Investor::StartupsController < ActionController::API
         startup_meta_data = eval("startup.#{key}")
         investor_meta_data = eval("investor_data[:#{key}]")
 
-        weightage = (value * 2) / individual_score
+        weightage = (value.to_f * 2) / individual_score
         if startup_meta_data.class == Array
           if investor_meta_data.count > 0
-            startup_score += (((startup_meta_data & investor_meta_data).count / investor_meta_data.count) * individual_score) * weightage
+            startup_score += (((startup_meta_data & investor_meta_data).count.to_f / investor_meta_data.count) * individual_score) * weightage
           end
         
         else
@@ -86,8 +89,11 @@ class Api::V1::Investor::StartupsController < ActionController::API
             startup_score += (individual_score * weightage)
           end
         end
-      end 
+      end
+      results << { :company_name => startup.company_name, :match_score => number_with_precision((startup_score / total_score) * 100, precision: 2) }
     end
+
+    render json: { results: results }
   end
 
   private
