@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_042847) do
+ActiveRecord::Schema.define(version: 2021_02_14_064817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,32 @@ ActiveRecord::Schema.define(version: 2021_02_14_042847) do
 
   create_table "services", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "startups", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
+    t.string "website"
+    t.string "country"
+    t.string "company_name"
+    t.string "state"
+    t.string "part_of_accelerator"
+    t.string "accelarator_name"
+    t.string "investment_stages", default: [], array: true
+    t.string "last_investment_stages", default: [], array: true
+    t.string "investment_rates"
+    t.string "previous_investment_rates"
+    t.string "investment_category", default: [], array: true
+    t.string "investment_industry", default: [], array: true
+    t.string "emerging_technologies", default: [], array: true
+    t.string "previous_emerging_technologies", default: [], array: true
+    t.string "investory_type"
+    t.string "value_preposition"
+    t.string "competitors"
+    t.string "additional_comments"
+    t.string "about_us"
   end
 
   add_foreign_key "availabilities", "availability_durations", on_delete: :cascade
