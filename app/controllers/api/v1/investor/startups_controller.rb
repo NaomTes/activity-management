@@ -93,7 +93,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       results << { :company_name => startup.company_name, :match_score => number_with_precision((startup_score / total_score) * 100, precision: 2) }
     end
 
-    render json: { results: results }
+    render json: { results: results.sort_by{ |item| item[:match_score] }.reverse }
   end
 
   private
