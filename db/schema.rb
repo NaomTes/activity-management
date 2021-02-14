@@ -207,7 +207,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_064817) do
     t.string "investment_industry", default: [], array: true
     t.string "emerging_technologies", default: [], array: true
     t.string "previous_emerging_technologies", default: [], array: true
-    t.string "investory_type"
+    t.string "investor_type"
     t.string "value_preposition"
     t.string "competitors"
     t.string "additional_comments"

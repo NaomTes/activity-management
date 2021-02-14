@@ -19,7 +19,7 @@ class CreateStartupTable < ActiveRecord::Migration[6.0]
       t.string :investment_industry, array: true, default: []
       t.string :emerging_technologies, array: true, default: []
       t.string :previous_emerging_technologies, array: true, default: []
-      t.string :investory_type
+      t.string :investor_type
       t.string :value_preposition
       t.string :competitors
       t.string :additional_comments
