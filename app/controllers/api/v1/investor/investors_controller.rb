@@ -91,7 +91,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
           end
         end
       end
-      results << { :investor_name => investor.first_name + " " + investor.last_name, :match_score => number_with_precision((investor_score / total_score) * 100, precision: 2) }
+      results << { :id => investor.id, :email => investor.email, :phone_number => investor.phone_number, :investor_name => investor.first_name + " " + investor.last_name, :match_score => number_with_precision((investor_score / total_score) * 100, precision: 2) }
     end
     render json: { results: results.sort! { |a, b| a[:match_score] <=> b[:match_score] }.reverse  }
   end
