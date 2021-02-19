@@ -93,7 +93,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
           end
         end
       end
-      results << { :id => startup.id, :email => startup.email, :phone_number => startup.phone_number, :company_name => startup.company_name, :match_score => number_with_precision((startup_score / total_score) * 100, precision: 2) }
+      results << { :id => startup.id, :investor_type => startup.investor_type, :value_preposition => startup.value_preposition, :website => startup.website, :email => startup.email, :phone_number => startup.phone_number, :company_name => startup.company_name, :match_score => number_with_precision((startup_score / total_score) * 100, precision: 2) }
     end
 
     render json: { results: results.sort_by{ |item| item[:match_score] }.reverse }
