@@ -71,6 +71,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       :investment_industry,
       :previous_emerging_technologies,
 
+      :last_investment_stages,
       :country,
       :state,
     ).to_h

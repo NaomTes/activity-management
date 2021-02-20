@@ -70,6 +70,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
 
       :investment_industry,
       :previous_emerging_technologies,
+      :last_investment_stages,
 
       :country,
       :state,
