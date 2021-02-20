@@ -22,6 +22,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
+      investor_selected: []
     )
     @investor = Investor.new(
       investor_params
@@ -58,6 +59,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
+      investor_selected: []
     ).to_h
 
     ratings_data = params.require(:ratings).permit(
@@ -65,6 +67,12 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       :investment_category,
       :emerging_technologies,
       :investment_rates,
+
+      :investment_industry,
+      :previous_emerging_technologies,
+
+      :country,
+      :state,
     ).to_h
 
     individual_score = 1
@@ -91,7 +99,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
           end
         end
       end
-      results << { :id => investor.id, :website => investor.website, :email => investor.email, :phone_number => investor.phone_number, :investor_name => investor.first_name + " " + investor.last_name, :match_score => number_with_precision((investor_score / total_score) * 100, precision: 2) }
+      results << { :id => investor.id, :website => investor.website, :email => investor.email, :phone_number => investor.phone_number, :investor_name => investor.first_name + " " + investor.last_name, :match_score => ((investor_score / total_score) * 100).to_i }
     end
     render json: { results: results.sort! { |a, b| a[:match_score] <=> b[:match_score] }.reverse  }
   end

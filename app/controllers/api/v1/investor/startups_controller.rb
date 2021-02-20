@@ -26,6 +26,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
+      startup_selected: []
     )
     @startup = Startup.new(
       startup_params
@@ -58,6 +59,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
+      startup_selected: []
     ).to_h
 
     ratings_data = params.require(:ratings).permit(
@@ -65,6 +67,12 @@ class Api::V1::Investor::StartupsController < ActionController::API
       :investment_category,
       :emerging_technologies,
       :investment_rates,
+
+      :investment_industry,
+      :previous_emerging_technologies,
+
+      :country,
+      :state,
     ).to_h
 
     individual_score = 1
@@ -93,7 +101,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
           end
         end
       end
-      results << { :id => startup.id, :investor_type => startup.investor_type, :value_preposition => startup.value_preposition, :website => startup.website, :email => startup.email, :phone_number => startup.phone_number, :company_name => startup.company_name, :match_score => number_with_precision((startup_score / total_score) * 100, precision: 2) }
+      results << { :id => startup.id, :investor_type => startup.investor_type, :value_preposition => startup.value_preposition, :website => startup.website, :email => startup.email, :phone_number => startup.phone_number, :company_name => startup.company_name, :match_score => ((startup_score / total_score) * 100).to_i }
     end
 
     render json: { results: results.sort_by{ |item| item[:match_score] }.reverse }

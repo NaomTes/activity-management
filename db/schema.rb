@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_064817) do
+ActiveRecord::Schema.define(version: 2021_02_20_133836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,8 @@ ActiveRecord::Schema.define(version: 2021_02_14_064817) do
     t.string "previous_emerging_technologies", default: [], array: true
     t.string "founder_type"
     t.string "about_us"
+    t.string "startup_selected", default: [], array: true
+    t.string "previous_investment_rates"
   end
 
   create_table "provided_services", force: :cascade do |t|
@@ -212,6 +214,7 @@ ActiveRecord::Schema.define(version: 2021_02_14_064817) do
     t.string "competitors"
     t.string "additional_comments"
     t.string "about_us"
+    t.string "investor_selected", default: [], array: true
   end
 
   add_foreign_key "availabilities", "availability_durations", on_delete: :cascade
