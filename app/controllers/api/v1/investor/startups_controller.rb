@@ -26,7 +26,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
-      startup_selected: []
+      investor_selected: []
     )
     @startup = Startup.new(
       startup_params

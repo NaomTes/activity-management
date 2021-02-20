@@ -131,7 +131,6 @@ ActiveRecord::Schema.define(version: 2021_02_20_133836) do
     t.string "founder_type"
     t.string "about_us"
     t.string "startup_selected", default: [], array: true
-    t.string "previous_investment_rates"
   end
 
   create_table "provided_services", force: :cascade do |t|

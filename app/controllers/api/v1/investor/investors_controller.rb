@@ -22,7 +22,7 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       investment_industry: [],
       emerging_technologies: [],
       previous_emerging_technologies: [],
-      investor_selected: []
+      startup_selected: []
     )
     @investor = Investor.new(
       investor_params
