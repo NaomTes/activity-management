@@ -66,7 +66,5 @@ gem "devise", "~> 4.7"
 gem "will_paginate", "~> 3.3"
 
 gem 'dotenv-rails'
-gem "activeadmin", "~> 2.7"
-
 gem 'country_select', '~> 4.0'
 gem "pagy", "~> 3.8"
