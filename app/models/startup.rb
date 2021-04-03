@@ -1,3 +1,3 @@
-class Startup < ApplicationRecord
+class Startup < ActiveRecord::Base
   
 end

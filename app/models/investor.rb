@@ -1,3 +1,3 @@
-class Investor < ApplicationRecord
+class Investor < ActiveRecord::Base
   
 end
