@@ -14,6 +14,8 @@ class Api::V1::Investor::InvestorsController < ActionController::API
     startup_data = startup_params.to_h
     ratings_data = ratings_params.to_h
 
+    Startup.save_current_record(startup_data)
+
     individual_score = 1
     total_score      = 0
 

@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 # Using rack-cors for cross site api
 gem 'rack-cors'
+gem 'cancancan', '~> 3.2.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -57,11 +58,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "hirb", "~> 0.7.3"
 
-gem "jwt", "~> 2.2"
+# gem "jwt", "~> 2.2"
 
 gem "fast_jsonapi", "~> 1.5"
 
-gem "devise", "~> 4.7"
+gem "devise-jwt", "~> 0.8.1"
 
 gem "will_paginate", "~> 3.3"
 

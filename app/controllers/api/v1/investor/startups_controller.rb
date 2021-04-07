@@ -1,8 +1,9 @@
 class Api::V1::Investor::StartupsController < ActionController::API
+  load_and_authorize_resource
+
   include ActionView::Helpers::NumberHelper
 
   def create
-    @startup = Startup.new(startup_params)
     if @startup.save
       render json: { startup: @startup }
     else
@@ -13,6 +14,8 @@ class Api::V1::Investor::StartupsController < ActionController::API
   def process_results
     investor_data = investor_params.to_h
     ratings_data  = ratings_params.to_h
+
+    Investor.save_current_record(investor_data)
 
     individual_score = 1
     total_score      = 0
