@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'notification@vcconnector.com'
+  default from: 'no-reply@vcconnector.com'
+  default to: 'vcconnector1@gmail.com'
+
   layout 'mailer'
 end

@@ -87,8 +87,13 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  config.action_mailer.default_url_options = { :host => 'warm-cove-76307.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {:openssl_verify_mode => 'none'}
+
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method    = :smtp
+  # config.action_mailer.smtp_settings      = { :address => "localhost", :port => 1025 }
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
