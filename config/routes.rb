@@ -21,6 +21,14 @@ Rails.application.routes.draw do
         resource :admins, only: [] do
           collection do
             post :bulk_upload_data
+            get  :fetch_investors
+            get  :fetch_startups
+          end
+        end
+
+        resources :home, only: [] do
+          collection do
+            post :contact_us
           end
         end
       end

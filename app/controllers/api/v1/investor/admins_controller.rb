@@ -5,6 +5,16 @@ class Api::V1::Investor::AdminsController < ApplicationController
     render json: { results: results }
   end
 
+  def fetch_investors
+    investors = Investor.all
+    render json: { investors: investors }
+  end
+
+  def fetch_startups
+    startups = Startup.all
+    render json: { startups: startups }
+  end
+
   private
 
   def upload_records_params

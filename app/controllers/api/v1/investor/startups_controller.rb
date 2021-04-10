@@ -65,6 +65,7 @@ class Api::V1::Investor::StartupsController < ActionController::API
       :accelarator_name,
       :investment_rates,
       :previous_investment_rates,
+      :founders_information,
       :value_preposition,
       :competitors,
       :additional_comments,

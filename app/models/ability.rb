@@ -12,6 +12,7 @@ class Ability
       can [:process_results], Investor
       can [:process_results], Startup
       can [:sign_in], User
+      can [:contact_us], Home
     end
 
     # Define abilities for the passed in user here. For example:
