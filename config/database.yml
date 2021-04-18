@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: activity_management_production
-  username: activity_management
-  password: <%= ENV['ACTIVITY_MANAGEMENT_DATABASE_PASSWORD'] %>
+  database: naomtes
+  username: naomtes
+  password: kpyFk3z2zk7Jsja
+  host: naomtes.c55k4n1tbtoz.us-east-2.rds.amazonaws.com
+  port: 5432
