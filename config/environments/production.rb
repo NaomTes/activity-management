@@ -89,7 +89,14 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'ec2-3-143-225-62.us-east-2.compute.amazonaws.com' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "ec2-3-143-225-62.us-east-2.compute.amazonaws.com", :port => 3000, :openssl_verify_mode => 'none' }
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'vcconector.com',
+  user_name:            'noreplyvcconector@gmail.com',
+  password:             'Naomtes@1',
+  authentication:       'plain',
+  enable_starttls_auto: true }
 
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.delivery_method    = :smtp
