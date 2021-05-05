@@ -11,8 +11,8 @@ class Api::V1::Investor::InvestorsController < ActionController::API
   end
 
   def process_results
-    startup_data = startup_params.to_h
-    ratings_data = ratings_params.to_h
+    startup_data  = process_startup_params.to_h
+    ratings_data  = ratings_params.to_h
 
     Startup.save_current_record(startup_data)
 
@@ -47,8 +47,26 @@ class Api::V1::Investor::InvestorsController < ActionController::API
 
   private
 
+  def process_startup_params
+    params[:startup][:investment_category]   = merger_other_params(startup_params[:investment_category], startup_params[:investment_category_other])
+    params[:startup][:investment_industry]   = merger_other_params(startup_params[:investment_industry], startup_params[:investment_industry_other])
+    params[:startup][:emerging_technologies] = merger_other_params(startup_params[:emerging_technologies], startup_params[:emerging_technology_other])
+    params[:startup][:previous_emerging_technologies] = merger_other_params(startup_params[:previous_emerging_technologies], startup_params[:previous_emerging_technology_other])
+    startup_params
+  end
+
+  def merger_other_params(items, other_items)
+    if other_items.present?
+      other_items = other_items.split(',')
+      items.delete('others')
+      other_items.map(&:strip!)
+      items += other_items
+    end
+    items
+  end
+
   def investor_params
-    params.require(:investors).permit(
+    params.require(:investor).permit(
       :first_name,
       :last_name,
       :email,
@@ -62,6 +80,10 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       :investment_rates,
       :founder_type,
       :about_us,
+      :investment_industry_other,
+      :investment_category_other,
+      :emerging_technology_other,
+      :previous_emerging_technology_other,
       investment_stages: [],
       last_investment_stages: [],
       investment_category: [],
@@ -92,6 +114,10 @@ class Api::V1::Investor::InvestorsController < ActionController::API
       :additional_comments,
       :about_us,
       :investor_type,
+      :investment_category_other,
+      :previous_emerging_technology_other,
+      :emerging_technology_other,
+      :investment_industry_other,
       investment_stages: [],
       last_investment_stages: [],
       investment_category: [],

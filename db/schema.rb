@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_085703) do
+ActiveRecord::Schema.define(version: 2021_05_05_141657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2021_04_10_085703) do
     t.string "founder_type"
     t.string "about_us"
     t.string "startup_selected", default: [], array: true
+    t.string "investment_industry_other"
+    t.string "investment_category_other"
+    t.string "emerging_technology_other"
+    t.string "previous_emerging_technology_other"
   end
 
   create_table "jwt_denylists", force: :cascade do |t|
@@ -70,6 +74,10 @@ ActiveRecord::Schema.define(version: 2021_04_10_085703) do
     t.string "about_us"
     t.string "investor_selected", default: [], array: true
     t.string "founders_information", default: ""
+    t.string "investment_industry_other"
+    t.string "investment_category_other"
+    t.string "previous_emerging_technology_other"
+    t.string "emerging_technology_other"
   end
 
   create_table "users", force: :cascade do |t|
