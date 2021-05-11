@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
                   founder_type: investor_record[:founder_type], about_us: investor_record[:about_us], investment_stages: investor_record[:investment_stages],
                   last_investment_stages: investor_record[:last_investment_stages].try(:split, ','), investment_category: investor_record[:investment_category].try(:split, ','),
                   investment_industry: investor_record[:investment_industry].try(:split, ','), emerging_technologies: investor_record[:emerging_technologies].try(:split, ','),
-                  previous_emerging_technologies: investor_record[:previous_emerging_technologies].try(:split, ','), startup_selected: investor_record[:startup_selected].try(:split, ',')
+                  previous_emerging_technologies: investor_record[:previous_emerging_technologies].try(:split, ','), startup_selected: investor_record[:startup_selected].try(:split, ','),
+                  added_by_admin: true
                 )
       if investor.save
         saved_records << { row_number: investor_record[:row_number], success: true, message: "Saved Successfuly" }
@@ -61,7 +62,8 @@ class User < ActiveRecord::Base
                   investor_type: startup_record[:investor_type], investment_stages: startup_record[:investment_stages].try(:split, ','), last_investment_stages: startup_record[:last_investment_stages].try(:split, ','),
                   investment_category: startup_record[:investment_category].try(:split, ','), investment_industry: startup_record[:investment_industry].try(:split, ','),
                   emerging_technologies: startup_record[:emerging_technologies].try(:split, ','), previous_emerging_technologies: startup_record[:previous_emerging_technologies].try(:split, ','),
-                  investor_selected: startup_record[:investor_selected].try(:split, ',')
+                  investor_selected: startup_record[:investor_selected].try(:split, ','),
+                  added_by_admin: true
                 )
       if startup.save
         saved_records << { row_number: startup_record[:row_number], success: true, message: "Saved Successfuly" }
