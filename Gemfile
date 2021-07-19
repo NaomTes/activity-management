@@ -69,3 +69,4 @@ gem "will_paginate", "~> 3.3"
 gem 'dotenv-rails'
 gem 'country_select', '~> 4.0'
 gem "pagy", "~> 3.8"
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
