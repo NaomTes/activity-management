@@ -48,5 +48,5 @@ production:
   database: activitymanagement
   username: postgres
   password: If54EdSwMFd1reORA8of
-  host: activitymanagement.c55k4n1tbtoz.us-east-2.rds.amazonaws.com
+  host: activitymanagement.czbtg97xdzte.us-east-2.rds.amazonaws.com
   port: 5432
